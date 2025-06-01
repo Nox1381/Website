@@ -3,68 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Artistic Statement</title>
+  <title>Emotional Statement</title>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Particle.js -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
   <style>
-    body, html {
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
+      background: #0a0a0a;
       font-family: 'Orbitron', sans-serif;
-      overflow-x: hidden;
-      height: 100vh;
-      background: #0f0f0f;
-      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
     }
 
-    #particles-js {
+    canvas {
       position: fixed;
-      width: 100%;
-      height: 100%;
+      top: 0;
+      left: 0;
       z-index: -1;
     }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      text-align: center;
-      padding: 40px;
-    }
-
     .glass-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(15px);
-      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 40px;
-      max-width: 700px;
-      box-shadow: 0 20px 50px rgba(255, 255, 255, 0.1);
-      margin-bottom: 40px;
-      transition: transform 0.3s ease;
-    }
-
-    .glass-card:hover {
-      transform: scale(1.05) rotateX(5deg);
-    }
-
-    .neumorphic-card {
-      background: #0f0f0f;
       border-radius: 20px;
-      box-shadow: 10px 10px 30px #0a0a0a, -10px -10px 30px #141414;
-      padding: 30px;
-      margin-top: 20px;
-      color: #f5f5f5;
+      padding: 30px 40px;
+      margin: 20px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+      color: white;
+      max-width: 90%;
+      text-align: center;
     }
 
     .typewriter {
@@ -73,7 +47,11 @@
       overflow: hidden;
       border-right: 2px solid #fff;
       width: 0;
-      animation: typing 4s steps(30, end) forwards, blink 0.75s step-end infinite;
+      animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
+    }
+
+    .glass-card:nth-child(3) .typewriter {
+      animation-delay: 4.2s;
     }
 
     @keyframes typing {
@@ -82,133 +60,61 @@
     }
 
     @keyframes blink {
-      50% { border-color: transparent }
-    }
-
-    .card-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .flip-card {
-      background-color: transparent;
-      width: 250px;
-      height: 150px;
-      perspective: 1000px;
-    }
-
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-    }
-
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flip-card-front, .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 15px;
-      backface-visibility: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    .flip-card-front {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .flip-card-back {
-      background-color: #ff0066;
-      color: white;
-      transform: rotateY(180deg);
+      50% { border-color: transparent; }
     }
   </style>
 </head>
 <body>
 
-<div id="particles-js"></div>
+<canvas id="bg"></canvas>
 
-<div class="container">
-  <div class="glass-card">
-    <div class="typewriter">I hate u Alex</div>
-  </div>
+<div class="glass-card">
+  <div class="typewriter">I hate u Alex</div>
+</div>
 
-  <div class="neumorphic-card">
-    This is a deeply emotional, complex artistic statement conveyed with technology, texture, and typography.
-  </div>
-
-  <div class="card-grid">
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">Hover Me</div>
-        <div class="flip-card-back">Emotion</div>
-      </div>
-    </div>
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">Flip Side</div>
-        <div class="flip-card-back">Raw Truth</div>
-      </div>
-    </div>
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">Glitch</div>
-        <div class="flip-card-back">Human</div>
-      </div>
-    </div>
-  </div>
+<div class="glass-card">
+  <div class="typewriter">Relationship status: single</div>
 </div>
 
 <script>
-  // Load particles.js config
-  particlesJS("particles-js", {
-    particles: {
-      number: { value: 80 },
-      color: { value: "#ffffff" },
-      shape: { type: "circle" },
-      opacity: { value: 0.5 },
-      size: { value: 3 },
-      line_linked: {
-        enable: true,
-        distance: 150,
-        color: "#ffffff",
-        opacity: 0.4,
-        width: 1
-      },
-      move: { enable: true, speed: 2 }
-    },
-    interactivity: {
-      events: {
-        onhover: { enable: true, mode: "repulse" },
-        onclick: { enable: true, mode: "push" }
-      },
-      modes: {
-        repulse: { distance: 100 },
-        push: { particles_nb: 4 }
-      }
-    },
-    retina_detect: true
-  });
+  // Canvas background animation - flowing grid effect
+  const canvas = document.getElementById("bg");
+  const ctx = canvas.getContext("2d");
+  let width, height;
 
-  // Animate cards with GSAP
-  gsap.from(".glass-card", { y: -50, opacity: 0, duration: 1.5, ease: "power3.out" });
-  gsap.from(".neumorphic-card", { y: 50, opacity: 0, duration: 1.5, delay: 0.5, ease: "power3.out" });
-  gsap.from(".flip-card", { scale: 0.5, opacity: 0, stagger: 0.2, delay: 1, ease: "elastic.out(1, 0.5)", duration: 1.2 });
+  function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  const gridSize = 30;
+  let time = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let x = 0; x < width; x += gridSize) {
+      for (let y = 0; y < height; y += gridSize) {
+        const dx = x - width / 2;
+        const dy = y - height / 2;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const offset = Math.sin(dist / 50 - time / 20) * 10;
+
+        ctx.beginPath();
+        ctx.arc(x, y + offset, 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.15 + 0.25 * Math.sin(dist / 100 - time / 30)})`;
+        ctx.fill();
+      }
+    }
+
+    time++;
+    requestAnimationFrame(draw);
+  }
+
+  draw();
 </script>
 
 </body>
