@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to My Site</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #0a0a0a;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin-top: 100px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .glass-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px 40px;
+      margin: 20px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+      color: white;
+      text-align: center;
+      width: 100%;
+    }
+
+    .glass-box h1 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .glass-box p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .subscribe-box {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .subscribe-box input {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-family: 'Orbitron';
+      margin-bottom: 10px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .subscribe-box button {
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      border-radius: 10px;
+      font-family: 'Orbitron';
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .subscribe-box button:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-links {
+      margin-top: 30px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 20px;
+      border-radius: 12px;
+      margin: 0 10px;
+      backdrop-filter: blur(10px);
+      transition: background 0.3s;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 600px) {
+      .glass-box {
+        padding: 20px;
+      }
+
+      .glass-box h1 {
+        font-size: 1.5rem;
+      }
+
+      .subscribe-box input {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="container">
+
+  <div class="glass-box">
+    <h1>Welcome to My Personal Site</h1>
+    <p>Hey there! I'm an artist, developer, and someone with very strong opinions (see the hate page). This is my little digital domain where I express myself freely and share what I'm into.</p>
+  </div>
+
+  <div class="glass-box">
+    <h1>Subscribe to My Updates</h1>
+    <p>Wanna stay up to date with my weird creations, code, or cursed ideas?</p>
+    <div class="subscribe-box">
+      <input type="email" placeholder="Your Email" />
+      <button>Subscribe</button>
+    </div>
+  </div>
+
+  <div class="nav-links">
+    <a href="hate.html">Go to the Hate Page</a>
+  </div>
+
+</div>
+
+<script>
+  // Canvas animation - fluid tech wave
+  const canvas = document.getElementById("bg");
+  const ctx = canvas.getContext("2d");
+  let width, height;
+
+  function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  const gridSize = 30;
+  let time = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let x = 0; x < width; x += gridSize) {
+      for (let y = 0; y < height; y += gridSize) {
+        const dx = x - width / 2;
+        const dy = y - height / 2;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const offset = Math.sin(dist / 50 - time / 20) * 10;
+
+        ctx.beginPath();
+        ctx.arc(x, y + offset, 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.15 + 0.25 * Math.sin(dist / 100 - time / 30)})`;
+        ctx.fill();
+      }
+    }
+
+    time++;
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+</script>
+
+</body>
+</html>
